@@ -4,8 +4,20 @@ import {
 import React from "react";
 
 const MUTATION_PROYECTO = gql`
-    mutation creeProyecto($idProyecto:String, $nombreProyecto:String, $objGe:String, $objEsp:String, $presupuesto:Int, $estado:String, $lider:ID){
-        SetCrearProyecto(project:{idProyecto:$idProyecto, nombre:$nombreProyecto, objetivosGenerales:$objGe, objetivosEspecificos:$objEsp, presupuesto:$presupuesto, estado:$estado, lider:$lider,})
+    mutation CreacionProyecto($idProyecto:String, 
+        $nombreProyecto:String!, 
+        $objGeneral:String, 
+        $objEspecifico:String, 
+        $presupuesto:Int, 
+        $estado:String,
+        $lider:String){
+        SetCrearProyecto(project:{idProyecto:$idProyecto, 
+            nombreProyecto:$nombreProyecto, 
+            objGeneral:$objGeneral, 
+            objEspecifico:$objEspecifico, 
+            presupuesto:$presupuesto, 
+            estado:$estado, 
+            lider:$lider})
     }
 `;
 
@@ -14,8 +26,8 @@ const CrearProyecto = () => {
     let project = {
         idProyecto: "",
         nombreProyecto: "",
-        objetivosGenerales: "",
-        ObjetivosEspecificos: "",
+        objGeneral: "",
+        objEspecifico: "",
         presupuesto: 0,
         estado: "",
         lider: "",
@@ -27,8 +39,8 @@ const CrearProyecto = () => {
             creadorDeProyecto({variables:{
                 idProyecto: project.idProyecto.value,
                 nombreProyecto: project.nombreProyecto.value,
-                objGe: project.objetivosGenerales.value,
-                objGe: project.objetivosEspecificos.value,
+                objGeneral: project.objGeneral.value,
+                objEspecifico: project.objEspecifico.value,
                 presupuesto: parseInt(project.presupuesto.value),
                 estado: project.estado.value,
                 lider: project.lider.value
@@ -44,11 +56,11 @@ const CrearProyecto = () => {
             </div>
             <div>
                 <label>Objetivos Generales</label>
-                <input ref={objetivosGen => project.objetivosGenerales = objetivosGen} placeholder="Objetivos Generales" />
+                <input ref={objetivosGen => project.objGeneral = objetivosGen} placeholder="Objetivos Generales" />
             </div>
             <div>
                 <label>Objetivos Especificos</label>
-                <input ref={objetivosEsp => project.objetivosEspecificos = objetivosEsp} placeholder="Objetivos Especificos" />
+                <input ref={objetivosEsp => project.objEspecifico = objetivosEsp} placeholder="Objetivos Especificos" />
             </div>
             <div>
                 <label>Presupuesto</label>

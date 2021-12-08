@@ -9,6 +9,7 @@ import {
 import CrearProyecto from './components/proyectos/HU_12.js';
 
 
+
 const client = new ApolloClient({
   uri: 'http://localhost:3020/graphql',
   cache: new InMemoryCache()
