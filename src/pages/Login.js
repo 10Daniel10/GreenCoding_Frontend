@@ -5,10 +5,12 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { AuthContext } from '../context/auth';
 import { useForm } from '../util/hooks';
-import {gql} from '@apollo/client'; 
+import {gql} from '@apollo/client';
+
 
 
 function Login(props) {
+  
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
   const [getresponse,result]=useMutation(validateUser);
@@ -27,6 +29,7 @@ useEffect(()=>{
 if(token && token.value==="Token válido"){
   console.log(token)
         context.login(token.token);
+        
          props.history.push('/');
 }
 
@@ -111,6 +114,7 @@ mutation ValidarToken($token: String) {
     perfil
     estado
     token
+    id
   }
 }
 

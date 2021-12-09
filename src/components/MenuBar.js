@@ -2,10 +2,18 @@ import React, { useContext, useState } from 'react';
 import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
+//import { ObtenerUsuarioQuery } from '../util/graphql';
+//import { useQuery } from '@apollo/react-hooks';
 import { AuthContext } from '../context/auth';
 
+
 function MenuBar() {
+
   const { user, logout } = useContext(AuthContext);
+
+
+
+
   const pathname = window.location.pathname;
 
   const path = pathname === '/' ? 'home' : pathname.substr(1);
@@ -13,14 +21,32 @@ function MenuBar() {
 
   const handleItemClick = (e, { name }) => setActiveItem(name);
 
-  const menuBar = user ? (
+
+  const menuBar = user ? 
+  
+  (
+    
+
     <Menu pointing secondary size="massive" color="teal">
-      <Menu.Item name={user.username} active as={Link} to="/" />
+      <Menu.Item name={user.perfil} active as={Link} to="/" />
+
+      <Menu.Item  name="Mi perfil" active as={Link} to="/miperfil" />
+      
+
+      <Menu.Item  name="Proyectos Liderados" active as={Link} to="/misproyectos" />
+      
+
+      <Menu.Item  name="Mis inscripciones" active as={Link} to="/misisncripciones" />
+
+      
 
       <Menu.Menu position="right">
         <Menu.Item name="logout" onClick={logout} />
       </Menu.Menu>
     </Menu>
+
+    
+    
   ) : (
     <Menu pointing secondary size="massive" color="teal">
       <Menu.Item
@@ -49,8 +75,10 @@ function MenuBar() {
       </Menu.Menu>
     </Menu>
   );
+  
 
   return menuBar;
 }
+
 
 export default MenuBar;
