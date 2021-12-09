@@ -1,0 +1,49 @@
+.tabla{
+    background-color: #F3E5AB;
+    border:1px solid black;
+    text-align: center;
+}
+
+.centro{
+    
+    text-align: center;
+    margin: 50px 50px 50px 700px;
+}
+
+.centro2{
+    text-align: center;
+    margin: 50px;
+}
+
+.formulario{
+width: 400px;
+  background: #24303c;
+  padding: 30px;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 4px;
+  font-family: 'calibri';
+  color: white;
+  box-shadow: 7px 13px 37px #000;
+}
+
+.controls {
+    width: 100%;
+    background: #24303c;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #1f53c5;
+    font-family: 'calibri';
+    font-size: 18px;
+    color: white;
+  }
+
+  .titulo{
+    color:white;
+    text-align: center;
+  }
+
+  .boton {
+    margin-left: 135px;
+  }

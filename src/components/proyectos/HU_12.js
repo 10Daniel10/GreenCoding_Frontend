@@ -2,6 +2,7 @@ import {
     gql, useMutation
 } from "@apollo/client";
 import React from "react";
+import '../../Style.css';
 
 const MUTATION_PROYECTO = gql`
     mutation CreacionProyecto($idProyecto:String, 
@@ -33,7 +34,7 @@ const CrearProyecto = () => {
         lider: "",
     }
 
-    return (<div><h1>Crear Proyecto</h1>
+    return (<div className="formulario"><h1 className="titulo">Crear Proyecto</h1>
         <form onSubmit={e => {
             e.preventDefault();
             creadorDeProyecto({variables:{
@@ -48,34 +49,34 @@ const CrearProyecto = () => {
         }} >
              <div>
                 <label>ID Proyecto</label>
-                <input ref={id => project.idProyecto = id} placeholder="Id Proyecto" />
+                <input className="controls" ref={id => project.idProyecto = id} placeholder="Id Proyecto" />
             </div>
             <div>
                 <label>Nombre Proyecto</label>
-                <input ref={nombre => project.nombreProyecto = nombre} placeholder="Nombre" />
+                <input className="controls" ref={nombre => project.nombreProyecto = nombre} placeholder="Nombre" />
             </div>
             <div>
                 <label>Objetivos Generales</label>
-                <input ref={objetivosGen => project.objGeneral = objetivosGen} placeholder="Objetivos Generales" />
+                <input className="controls" ref={objetivosGen => project.objGeneral = objetivosGen} placeholder="Objetivos Generales" />
             </div>
             <div>
                 <label>Objetivos Especificos</label>
-                <input ref={objetivosEsp => project.objEspecifico = objetivosEsp} placeholder="Objetivos Especificos" />
+                <input className="controls" ref={objetivosEsp => project.objEspecifico = objetivosEsp} placeholder="Objetivos Especificos" />
             </div>
             <div>
                 <label>Presupuesto</label>
-                <input ref={presupuesto => project.presupuesto = presupuesto} placeholder="Presupuesto" />
+                <input className="controls" ref={presupuesto => project.presupuesto = presupuesto} placeholder="Presupuesto" />
             </div>
             <div>
                 <label>Estado Proyecto</label>
-                <input ref={estado => project.estado = estado} placeholder="Estado Proyecto" />
+                <input className="controls" ref={estado => project.estado = estado} placeholder="Estado Proyecto" />
             </div>
             <div>
                 <label>Lider</label>
-                <input ref={lider => project.lider = lider} placeholder="Lider" />
+                <input className="controls" ref={lider => project.lider = lider} placeholder="Lider" />
             </div>
             
-            <div><button type="submit">Registrar Proyecto</button></div>
+            <div><button className="boton" type="submit">Registrar Proyecto</button></div>
         </form>
     </div>)
 }

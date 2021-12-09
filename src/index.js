@@ -5,7 +5,8 @@ import {
   InMemoryCache,
   ApolloProvider,
 } from "@apollo/client";
-//import Proyectos from './components/Proyectos';
+import EstudiantesRegistrados from './components/usuarios/HU_10.js';
+import ProyectosLiderActivos from './components/proyectos/HU_14.js'
 import CrearProyecto from './components/proyectos/HU_12.js';
 
 
@@ -19,4 +20,6 @@ const inicio = document.getElementById("root")
 ReactDOM.render(
   <ApolloProvider client={client}>
     <CrearProyecto />
+    <EstudiantesRegistrados />
+    < ProyectosLiderActivos />
   </ApolloProvider>, inicio)
