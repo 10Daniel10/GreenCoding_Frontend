@@ -10,7 +10,6 @@ import {gql} from '@apollo/client';
 
 
 function Login(props) {
-  
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
   const [getresponse,result]=useMutation(validateUser);
@@ -24,36 +23,26 @@ useEffect(()=>{
   if(result.data){
     setToken(result.data.ValidarToken)
   }
-
 },[result])
 if(token && token.value==="Token válido"){
   console.log(token)
-        context.login(token.token);
-        
+        context.login(token.token);    
          props.history.push('/');
 }
-
   const { onChange, onSubmit, values } = useForm(loginUserCallback, {
     correo: '',
     clave: ''
   });
-
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(
       _,
-      {
-        data: { login: userData }
-      }
-    ) {
-      showToken(userData.value)
-
-    },
+      {data: { login: userData } }
+    ) {showToken(userData.value)},
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values
   });
-
   function loginUserCallback() {
     loginUser();
   }

@@ -1,10 +1,8 @@
 import React, {useContext } from 'react';
-
 import { useQuery } from '@apollo/react-hooks';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {ObtenerUsuarioQuery} from '../util/graphql';
 import '../../src/App.css'
-
 import { AuthContext } from '../context/auth';
 function MiPerfil() {
     
@@ -17,7 +15,6 @@ function MiPerfil() {
             id: obj.id
         }
     });
-
     return (
         <div>
             <div className="page-title">
@@ -31,7 +28,6 @@ function MiPerfil() {
                         <h1>{obtenerUsuario.clave}</h1>
                         <h1>{obtenerUsuario.estado}</h1>
                         <h1>{obtenerUsuario.tipo}</h1>
-
                     </div>
                 )}
             </div>

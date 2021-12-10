@@ -31,34 +31,32 @@ export const ObtenerUsuarioQuery = gql`
   }
 }
 
-  
-
-  
 `;
 export const ObtenerPostulacionesQuery=gql`
-query ($id: String) {
-  obtenerMisPostulaciones(id: $id) {
+ query($_id: String) {
+  obtenerMisPostulaciones(id: $_id) {
     id
     nombreProyecto
-    objGeneral
-    objEspecifico
     presupuesto
-    fechaInicio
-    fechaTermina
+    lider {
+      id
+    }
     estado
-    fase
     estudiantesInscritos {
       id
-      estudiante
     }
-    lider {
-      correo
-    }
+    fase
     avances {
-      idProyecto {
-        nombreProyecto
-      }
+      id
     }
+    
   }
+
 }
+`;
+export const InscribirmeProyectos=gql`
+mutation ($idProyecto: String!, $idUsuario: String!) {
+  InscribirmeProyecto(idProyecto: $idProyecto, idUsuario: $idUsuario)
+}
+
 `;
