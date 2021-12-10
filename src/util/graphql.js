@@ -60,3 +60,8 @@ mutation ($idProyecto: String!, $idUsuario: String!) {
 }
 
 `;
+export const Veravance=gql`
+mutation ($idProyecto: String!, $estudiante: String!) {
+  verAvances(idProyecto: $idProyecto, estudiante: $estudiante)
+}
+`;

@@ -21,14 +21,12 @@ function Home() {
     data: { obtenerProyectos: posts }
   } = useQuery(ObtenerProyectosQuery);
 
-  const toggleModal = (id) => {
-    
+  const toggleModal = (id) => { 
     idProyecto = id;
     if (user) {
       const obj = JSON.parse(JSON.stringify(user))
       idUsuario = obj.id
     }
-    alert("sdsds")
     if (idProyecto !== "" && idUsuario !== "") {
       InscribirmeProyecto(
         {
@@ -39,9 +37,7 @@ function Home() {
             }
           ) {
             console.log(userData);              
-          },
-          
-          variables: {idProyecto,idUsuario}
+          }, variables: {idProyecto,idUsuario}
         }
       ) 
     }   
