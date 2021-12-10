@@ -2,6 +2,7 @@ import {
     gql
   } from "@apollo/client"
 
+
 export const infoProyectos = gql`
   query {
           obtenerProyectos {
@@ -13,9 +14,9 @@ export const infoProyectos = gql`
         }
       }
 `
-export const detallesProyecto = gql`
+export const detallesProyecto = (id) => {gql`
   query {
-    obtenerProyecto(idProyecto: "001") {
+    obtenerProyecto(idProyecto: ${id}) {
     nombreProyecto
     objGeneral
     objEspecifico
@@ -25,4 +26,4 @@ export const detallesProyecto = gql`
     }
   }
 }
-`
+`}
