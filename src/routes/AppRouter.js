@@ -1,13 +1,16 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 import { Saludo } from "../components/Saludo"
-import { AProyectos } from "../views/admin/AProyectos"
+import Inicio from "../views/Inicio"
+import { Proyectos } from "../views/Proyectos"
+import { Usuarios } from "../views/Usuarios"
 
 export const AppRouter = () => {
     return(
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={ <Saludo/> } />
-                <Route path="/proyectos" element={ <AProyectos/> } />
+                <Route path="/" element={ <Inicio /> } />
+                <Route path="/Proyectos/:tipo" element={ <Proyectos/> } />
+                <Route path="/Usuarios/:tipo" element={ <Usuarios/> } />
             </Routes>
         </BrowserRouter>
     )

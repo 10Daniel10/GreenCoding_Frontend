@@ -6,6 +6,7 @@ import {
   ApolloClient,
   InMemoryCache
 } from "@apollo/client"
+import MenuAppBar from './components/MenuPrincipal';
 
 const client = new ApolloClient({
   uri: 'http://localhost:3020/graphql',
@@ -14,6 +15,7 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
+    <MenuAppBar />
     <App />
   </ApolloProvider>,
   document.getElementById('root')

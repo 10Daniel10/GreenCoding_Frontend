@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Box, Collapse, IconButton, TableCell, TableRow } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Detalles from './Detalles';
 import Acciones from './Acciones';
 
 const Row = (props) => {
@@ -23,49 +22,21 @@ const Row = (props) => {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.idProyecto}
+          {row.id}
         </TableCell>
-        <TableCell align="right">{row.nombreProyecto}</TableCell>
+        <TableCell align="right">{row.nombre}</TableCell>
+        <TableCell align="right">{row.correo}</TableCell>
+        <TableCell align="right">{row.tipo}</TableCell>
         <TableCell align="right">{row.estado}</TableCell>
-        <TableCell align="right">{row.fase}</TableCell>
-        <TableCell align="right">{row.fechaInicio}</TableCell>
-        <TableCell align="right">{row.fechaTermina}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <center>
-                <h5>Detalles</h5>
-              </center>
-              <ul className="list-grout list-group-flush">
-                <li className="list-group-item">
-                  <b>Nombre Proyecto:</b> {row.nombreProyecto}
-                </li>
-                <li className="list-group-item">
-                  <b>Objetivo General:</b> {row.objGeneral}
-                </li>
-                <li className="list-group-item">
-                  <b>Objetivos Especificos:</b> {row.objEspecifico}
-                </li>
-                <li className="list-group-item">
-                  <b>Presupuesto:</b> {row.presupuesto}
-                </li>
-                <li className="list-group-item">
-                  <b>Lider:</b> {row.lider?.nombre}
-                  <br />
-                  <b>ID:</b> {row.lider?.id}
-                </li>
-                <li className="list-group-item">
-                  <b>Estudiantes Inscritos:</b>
-                </li>
-                <Detalles row={row} />
-
-              </ul>
-              <center>
                 <h5>Actualizar</h5>
 
-                <Acciones idProyecto={row.idProyecto} estadoActual={row.estado} faseActual={row.fase} />
+                <Acciones id={row.id} estadoActual={row.estado} />
 
               </center>
             </Box>
