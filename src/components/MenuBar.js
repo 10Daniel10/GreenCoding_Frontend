@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
@@ -6,13 +6,24 @@ import { Link } from 'react-router-dom';
 //import { useQuery } from '@apollo/react-hooks';
 import { AuthContext } from '../context/auth';
 
-
 function MenuBar() {
-
   const { user, logout } = useContext(AuthContext);
+  const [value, setValue] = useState("");
+ 
+  let val=""
 
 
+  useEffect(() => {
+  
+      setValue(val);
+ 
+  }, [val]);
+    if (user){
 
+    const obj = JSON.parse(JSON.stringify(user))
+    val=obj.perfil
+    
+  }
 
   const pathname = window.location.pathname;
 
@@ -20,65 +31,69 @@ function MenuBar() {
   const [activeItem, setActiveItem] = useState(path);
 
   const handleItemClick = (e, { name }) => setActiveItem(name);
+  //activeItem === 'home'
+
+  const menuBar = user ?
+
+    (
 
 
-  const menuBar = user ? 
-  
-  (
-    
+      <Menu pointing secondary size="massive" color="teal">
+        <Menu.Item name={value} active as={Link} to="/" />
 
-    <Menu pointing secondary size="massive" color="teal">
-      <Menu.Item name={user.perfil} active as={Link} to="/" />
+        <Menu.Item name="Mi perfil" active as={Link} to="/miperfil" />
 
-      <Menu.Item  name="Mi perfil" active as={Link} to="/miperfil" />
-      
-
-      <Menu.Item  name="Proyectos Liderados" active as={Link} to="/misproyectos" />
-      
-
-      <Menu.Item  name="Mis inscripciones" active as={Link} to="/misisncripciones" />
-
-      
-
-      <Menu.Menu position="right">
-        <Menu.Item name="logout" onClick={logout} />
-      </Menu.Menu>
-    </Menu>
-
-    
-    
-  ) : (
-    <Menu pointing secondary size="massive" color="teal">
-      <Menu.Item
-        name="home"
-        active={activeItem === 'home'}
-        onClick={handleItemClick}
-        as={Link}
-        to="/"
-      />
-
-      <Menu.Menu position="right">
         <Menu.Item
-          name="login"
-          active={activeItem === 'login'}
+          name="proyectos"
+          active as={Link}
           onClick={handleItemClick}
-          as={Link}
-          to="/login"
+          to="/"
         />
-        <Menu.Item
-          name="register"
-          active={activeItem === 'register'}
-          onClick={handleItemClick}
-          as={Link}
-          to="/register"
-        />
-      </Menu.Menu>
-    </Menu>
-  );
-  
+
+
+        <Menu.Item name="Proyectos Liderados" active as={Link} to="/misproyectos" />
+
+
+        <Menu.Item name="Mis inscripciones" active as={Link} to="/misisncripciones" />
+
+
+
+        <Menu.Menu position="right">
+          <Menu.Item name="logout" onClick={logout} />
+        </Menu.Menu>
+      </Menu>
+
+
+
+    ) : (
+      <Menu pointing secondary size="massive" color="teal">
+
+
+        <Menu.Menu position="right">
+          <Menu.Item
+            name="login"
+            active={activeItem === 'login'}
+            onClick={handleItemClick}
+            as={Link}
+            to="/login"
+          />
+          <Menu.Item
+            name="register"
+            active={activeItem === 'register'}
+            onClick={handleItemClick}
+            as={Link}
+            to="/register"
+          />
+        </Menu.Menu>
+      </Menu>
+    );
+
+
 
   return menuBar;
 }
+
+
 
 
 export default MenuBar;

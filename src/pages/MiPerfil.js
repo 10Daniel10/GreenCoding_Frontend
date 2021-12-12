@@ -1,33 +1,79 @@
-import React, {useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {ObtenerUsuarioQuery} from '../util/graphql';
+import { ObtenerUsuarioQuery } from '../util/graphql';
 import '../../src/App.css'
+import { useHistory } from "react-router-dom";
 import { AuthContext } from '../context/auth';
 function MiPerfil() {
-    
+    const history = useHistory();
+
     const { user } = useContext(AuthContext);
+    if (user === null) {
+        history.push("/login")
+
+    }
+    const val = {
+        nombre: "",
+        correo: "",
+        clave: "",
+        estado: "",
+        tipo: ""
+    }
+    const [datos, setDatos] = useState(val);
+
+
+
+    const obtenerUsuario = {}
+    useEffect(() => {
+
+        setDatos(val);
+
+    },[obtenerUsuario]);
+
+
+
     const obj = JSON.parse(JSON.stringify(user))
-   
+    let id = "";
+    
+
+    
+    if (user) {
+        obtenerUsuario._id = obj.id
+        id = obtenerUsuario._id
+    }
+
     const { loading, error, data } = useQuery(ObtenerUsuarioQuery, {
-        variables: { id:obj.id },
-      });
-   
+        variables: { id },
+        skip: !obtenerUsuario?._id
+    });
+    if (data) {
+        
+        const {nombre,correo,clave,estado,tipo}=data.obtenerUsuario
+
+        val.nombre=nombre;
+        val.correo=correo;
+        val.clave=clave;
+        val.estado=estado;
+        val.tipo=tipo;
+
+    }
+
     return (
         <div>
             <div className="page-title">
                 <h1>Perfil</h1>
             </div>
             <div>
-                {data && (
+                
                     <div>
-                        <h1>{data.obtenerUsuario.nombre}</h1>
-                        <h1>{data.obtenerUsuario.correo}</h1>
-                        <h1>{data.obtenerUsuario.clave}</h1>
-                        <h1>{data.obtenerUsuario.estado}</h1>
-                        <h1>{data.obtenerUsuario.tipo}</h1>
+                        <h1>{datos.nombre}</h1>
+                        <h1>{datos.correo}</h1>
+                        <h1>{datos.clave}</h1>
+                        <h1>{datos.estado}</h1>
+                        <h1>{datos.tipo}</h1>
                     </div>
-                )}
+                
             </div>
         </div>);
 

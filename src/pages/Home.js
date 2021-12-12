@@ -7,16 +7,25 @@ import '../../src/App.css'
 import { InscribirmeProyectos } from '../util/graphql';
 import { AuthContext } from '../context/auth';
 import { ObtenerProyectosQuery } from '../util/graphql';
+import { useHistory } from "react-router-dom";
 
 let idProyecto = "";
 let idUsuario = "";
 
 function Home() {
-  const [InscribirmeProyecto] = useMutation(InscribirmeProyectos)
+  const history = useHistory();
+
+
+  
 
   const { user } = useContext(AuthContext);
+  if (user === null) {
+    history.push("/login")
 
+}
+const [InscribirmeProyecto] = useMutation(InscribirmeProyectos)
 const { loading, error, data } = useQuery(ObtenerProyectosQuery);
+
 
   const toggleModal = (id) => { 
     idProyecto = id;
