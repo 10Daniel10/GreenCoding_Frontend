@@ -1,25 +1,47 @@
-import React, {  useContext } from 'react';
+import React, { useContext } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { ObtenerPostulacionesQuery } from '../util/graphql';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { useHistory } from "react-router-dom";
 import { AuthContext } from '../context/auth';
 import { Veravance } from '../util/graphql';
 import '../../src/App.css'
 let idProyecto = "";
 let estudiante = "";
-let proyecto="";
+let proyecto = "";
 
 
 function MisInscripciones() {
 
+    const history = useHistory();
+
     const [Veravances] = useMutation(Veravance)
     const { user } = useContext(AuthContext);
+    if (user === null) {
+        history.push("/login")
+
+    }
     const obj = JSON.parse(JSON.stringify(user))
-    const { loading, error, obtenerMisPostulaciones  } = useQuery(ObtenerPostulacionesQuery, {
-        variables: { _id:obj.id },
-      });
+    let id="";
+
+    const obtenerMisPostulaciones = {}
+    if (user) {
+        obtenerMisPostulaciones._id = obj.id
+        id=obtenerMisPostulaciones._id 
+    }
     
+
+    const { loading, error, data } = useQuery(ObtenerPostulacionesQuery, {
+        variables: {
+
+            id
+
+        },
+        skip: !obtenerMisPostulaciones?._id 
+    });
+    
+
+
     const toggle = (id) => {
 
         idProyecto = id;
@@ -43,20 +65,21 @@ function MisInscripciones() {
         }
 
     }
-   const handleChange = e => {
-        const { name, value } = e.target; 
-        proyecto=value;
+    const handleChange = e => {
+        const { name, value } = e.target;
+        proyecto = value;
 
     };
 
 
     return (
         <div>
+
             <div className="page-title">
                 <h1>inscripciones</h1>
             </div>
 
-           
+
 
             <div id="dvb" class="container table-responsive py-5" style={{ "width": "100%", "max-width:": "480px", "overflow-x": "scroll" }}>
 
@@ -82,8 +105,8 @@ function MisInscripciones() {
 
                     <tbody class="text-center">
 
-                        {obtenerMisPostulaciones &&
-                            obtenerMisPostulaciones.map((post) => (
+                        {data &&
+                            data.obtenerMisPostulaciones.map((post) => (
                                 <tr key={post.id}>
 
                                     <td>{post.nombreProyecto}</td>
@@ -97,9 +120,9 @@ function MisInscripciones() {
 
 
                                     <td className='operation'>
-                                    <input onChange={handleChange} type="radio" name="abc" 
-                                   
-                                    value={post.id}/>
+                                        <input onChange={handleChange} type="radio" name="abc"
+
+                                            value={post.id} />
                                     </td>
 
                                     <td className='operation'>

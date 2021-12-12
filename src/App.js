@@ -25,11 +25,12 @@ function App() {
       <Router>
         <Container>
           <MenuBar />
+          <AuthRoute exact path="/login" component={Login} />
           <Route exact path="/" component={Home} />
           <Route exact path="/miperfil" component={Miperfil} />
           <Route exact path="/misproyectos" component={MisProyectos} />
           <Route exact path="/misisncripciones" component={MisInscripciones} />
-          <AuthRoute exact path="/login" component={Login} />
+          
           <AuthRoute exact path="/register" component={Register} />
 
           <Route exact path="/posts/:postId" component={SinglePost} />

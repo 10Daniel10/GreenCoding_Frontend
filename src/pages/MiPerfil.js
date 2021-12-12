@@ -9,22 +9,23 @@ function MiPerfil() {
     const { user } = useContext(AuthContext);
     const obj = JSON.parse(JSON.stringify(user))
    
-    const { loading, error, obtenerUsuario } = useQuery(ObtenerUsuarioQuery, {
+    const { loading, error, data } = useQuery(ObtenerUsuarioQuery, {
         variables: { id:obj.id },
       });
+   
     return (
         <div>
             <div className="page-title">
                 <h1>Perfil</h1>
             </div>
             <div>
-                {obtenerUsuario && (
+                {data && (
                     <div>
-                        <h1>{obtenerUsuario.nombre}</h1>
-                        <h1>{obtenerUsuario.correo}</h1>
-                        <h1>{obtenerUsuario.clave}</h1>
-                        <h1>{obtenerUsuario.estado}</h1>
-                        <h1>{obtenerUsuario.tipo}</h1>
+                        <h1>{data.obtenerUsuario.nombre}</h1>
+                        <h1>{data.obtenerUsuario.correo}</h1>
+                        <h1>{data.obtenerUsuario.clave}</h1>
+                        <h1>{data.obtenerUsuario.estado}</h1>
+                        <h1>{data.obtenerUsuario.tipo}</h1>
                     </div>
                 )}
             </div>

@@ -1,8 +1,10 @@
 import { gql} from '@apollo/client';
 
+
 export const ObtenerProyectosQuery = gql`
   
     query obtenerProyectos {
+      obtenerProyectos{
       id
       nombreProyecto
       objGeneral
@@ -12,6 +14,7 @@ export const ObtenerProyectosQuery = gql`
       fechaTermina
       estado
       fase
+      }
     }
 
   
@@ -20,35 +23,34 @@ export const ObtenerProyectosQuery = gql`
 `;
 export const ObtenerUsuarioQuery = gql`
   
-    query ($id: String) {
-  obtenerUsuario(id: $id) {
-
-    nombre
-    correo
-    clave
-    estado
-    tipo
+    query ObtenerUsuario ($id: String) {
+      obtenerUsuario(id: $id) {
+      nombre
+      correo
+      clave
+      estado
+      tipo
   }
 }
 
 `;
 export const ObtenerPostulacionesQuery=gql`
- query($_id: String) {
-  obtenerMisPostulaciones(id: $_id) {
+ query ObtenerMisPostulaciones($id: String) {
+  obtenerMisPostulaciones(id: $id) {
+  id
+  nombreProyecto
+  presupuesto
+  lider {
     id
-    nombreProyecto
-    presupuesto
-    lider {
-      id
-    }
-    estado
-    estudiantesInscritos {
-      id
-    }
-    fase
-    avances {
-      id
-    }
+  }
+  estado
+  estudiantesInscritos {
+    id
+  }
+  fase
+  avances {
+    id
+  }
     
   }
 

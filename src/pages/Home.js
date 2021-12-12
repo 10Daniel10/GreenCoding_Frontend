@@ -82,7 +82,7 @@ const { loading, error, data } = useQuery(ObtenerProyectosQuery);
               <tbody class="text-center">
 
                 {data &&
-                  data.map((post) => (
+                  data.obtenerProyectos.map((post) => (
                     <tr key={post.id}>
 
 
