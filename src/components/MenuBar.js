@@ -33,7 +33,7 @@ function MenuBar() {
   const handleItemClick = (e, { name }) => setActiveItem(name);
   //activeItem === 'home'
 
-  const menuBar = user && value === "Lider" ?
+  const menuBar = user && user.perfil === "Lider" ?
 
     (
 
@@ -66,7 +66,7 @@ function MenuBar() {
 
 
 
-    ) : user && value === "Administrador" ? (
+    ) : user && user.perfil === "Administrador" ? (
       <Menu pointing secondary size="massive" color="teal">
         <Menu.Item name={value} active as={Link} to="/" />
 
@@ -85,7 +85,7 @@ function MenuBar() {
 
    
       </Menu>
-    ) : user && value === "Estudiante" ? (
+    ) : user && user.perfil === "Estudiante" ? (
       <Menu>
         <Menu.Item name={value} active as={Link} to="/" />
 
