@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const ObtenerProyectosQuery = gql`
   
-    {  obtenerProyectos {
+    query obtenerProyectos {
       id
       nombreProyecto
       objGeneral
@@ -14,7 +14,7 @@ export const ObtenerProyectosQuery = gql`
       fase
     }
 
-  }
+  
 
   
 `;

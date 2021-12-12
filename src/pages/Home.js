@@ -1,8 +1,8 @@
 import React, {  useContext } from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 //import { Grid } from 'semantic-ui-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import '../../src/App.css'
 import { InscribirmeProyectos } from '../util/graphql';
 import { AuthContext } from '../context/auth';
@@ -16,10 +16,7 @@ function Home() {
 
   const { user } = useContext(AuthContext);
 
-  const {
-    loading,
-    data: { obtenerProyectos: posts }
-  } = useQuery(ObtenerProyectosQuery);
+const { loading, error, data } = useQuery(ObtenerProyectosQuery);
 
   const toggleModal = (id) => { 
     idProyecto = id;
@@ -84,8 +81,8 @@ function Home() {
 
               <tbody class="text-center">
 
-                {posts &&
-                  posts.map((post) => (
+                {data &&
+                  data.map((post) => (
                     <tr key={post.id}>
 
 

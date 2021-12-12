@@ -1,5 +1,5 @@
 import React, {  useContext } from 'react';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/client';
 import { ObtenerPostulacionesQuery } from '../util/graphql';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,13 +16,10 @@ function MisInscripciones() {
     const [Veravances] = useMutation(Veravance)
     const { user } = useContext(AuthContext);
     const obj = JSON.parse(JSON.stringify(user))
-    const { loading,
-        data: { obtenerMisPostulaciones }
-    } = useQuery(ObtenerPostulacionesQuery, {
-        variables: {
-            _id: obj.id
-        }
-    });
+    const { loading, error, obtenerMisPostulaciones  } = useQuery(ObtenerPostulacionesQuery, {
+        variables: { _id:obj.id },
+      });
+    
     const toggle = (id) => {
 
         idProyecto = id;

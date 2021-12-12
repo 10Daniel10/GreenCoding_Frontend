@@ -1,5 +1,5 @@
 import React, {useContext } from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {ObtenerUsuarioQuery} from '../util/graphql';
 import '../../src/App.css'
@@ -8,13 +8,10 @@ function MiPerfil() {
     
     const { user } = useContext(AuthContext);
     const obj = JSON.parse(JSON.stringify(user))
-    const {
-        data: { obtenerUsuario }
-    } = useQuery(ObtenerUsuarioQuery, {
-        variables: {
-            id: obj.id
-        }
-    });
+   
+    const { loading, error, obtenerUsuario } = useQuery(ObtenerUsuarioQuery, {
+        variables: { id:obj.id },
+      });
     return (
         <div>
             <div className="page-title">
