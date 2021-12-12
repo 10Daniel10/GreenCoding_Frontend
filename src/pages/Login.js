@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client';
 
 import { AuthContext } from '../context/auth';
 import { useForm } from '../util/hooks';
-import {gql} from '@apollo/client';
+import { gql} from '@apollo/client';
 
 
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import gql from 'graphql-tag';
+import { gql} from '@apollo/client';
 import { useMutation } from '@apollo/client';
 import { Button, Confirm, Icon } from 'semantic-ui-react';
 
