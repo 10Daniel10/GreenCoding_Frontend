@@ -12,8 +12,10 @@ import MenuBar from './components/MenuBar';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import SinglePost from './pages/SinglePost';
+import Proyectos from './pages/Proyectos';
+import Usuarios from './pages/Usuarios';
 
+import Avances from './pages/Avances';
 import Miperfil from './pages/MiPerfil';
 import MisInscripciones from './pages/MisInscripciones';
 import MisProyectos from './pages/MisProyectos';
@@ -25,15 +27,18 @@ function App() {
       <Router>
         <Container>
           <MenuBar />
-          <AuthRoute exact path="/login" component={Login} />
-          <Route exact path="/" component={Home} />
+        
+          <Route exact path="/home" component={Home} />
           <Route exact path="/miperfil" component={Miperfil} />
           <Route exact path="/misproyectos" component={MisProyectos} />
+          <Route exact path="/proyectos" component={Proyectos} />
+          <Route exact path="/usuarios" component={Usuarios} />
+          <Route exact path="/avances" component={Avances} />
           <Route exact path="/misisncripciones" component={MisInscripciones} />
-          
+          <AuthRoute exact path="/login" component={Login} />
           <AuthRoute exact path="/register" component={Register} />
 
-          <Route exact path="/posts/:postId" component={SinglePost} />
+         
         </Container>
       </Router>
     </AuthProvider>

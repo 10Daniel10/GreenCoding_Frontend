@@ -1,34 +1,39 @@
-import React, { useContext, useState,useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { useMutation } from '@apollo/client';
 //import gql from 'graphql-tag';
 
 import { AuthContext } from '../context/auth';
 import { useForm } from '../util/hooks';
-import { gql} from '@apollo/client';
+import { gql } from '@apollo/client';
 
 
 
 function Login(props) {
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
-  const [getresponse,result]=useMutation(validateUser);
-  const [token,setToken]=useState(null);
-const showToken=name=>{
-  getresponse({variables:{
-    token:name
-  }})
-}
-useEffect(()=>{
-  if(result.data){
-    setToken(result.data.ValidarToken)
+  const [getresponse, result] = useMutation(validateUser);
+  const [token, setToken] = useState(null);
+  const showToken = name => {
+    getresponse({
+      variables: {
+        token: name
+      }
+    })
   }
-},[result])
-if(token && token.value==="Token válido"){
-  console.log(token)
-        context.login(token.token);    
-         props.history.push('/');
-}
+  useEffect(() => {
+    if (result.data) {
+      setToken(result.data.ValidarToken)
+    }
+  }, [result])
+  if (token && token.value === "Token válido") {
+    console.log(token)
+ 
+      context.login(token.token);
+      props.history.push('/');
+      window.location.reload();
+    
+  }
   const { onChange, onSubmit, values } = useForm(loginUserCallback, {
     correo: '',
     clave: ''
@@ -36,8 +41,8 @@ if(token && token.value==="Token válido"){
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(
       _,
-      {data: { login: userData } }
-    ) {showToken(userData.value)},
+      { data: { login: userData } }
+    ) { showToken(userData.value) },
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
@@ -60,7 +65,7 @@ if(token && token.value==="Token válido"){
           error={errors.correo ? true : false}
           onChange={onChange}
         />
-   
+
         <Form.Input
           label="clave"
           placeholder="Password.."
@@ -96,7 +101,7 @@ const LOGIN_USER = gql`
     }
   }
 `;
-const validateUser=gql`
+const validateUser = gql`
 mutation ValidarToken($token: String) {
   ValidarToken(token: $token) {
     value

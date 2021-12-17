@@ -22,14 +22,14 @@ function MisInscripciones() {
 
     }
     const obj = JSON.parse(JSON.stringify(user))
-    let id="";
+    let id = "";
 
     const obtenerMisPostulaciones = {}
     if (user) {
         obtenerMisPostulaciones._id = obj.id
-        id=obtenerMisPostulaciones._id 
+        id = obtenerMisPostulaciones._id
     }
-    
+
 
     const { loading, error, data } = useQuery(ObtenerPostulacionesQuery, {
         variables: {
@@ -37,9 +37,10 @@ function MisInscripciones() {
             id
 
         },
-        skip: !obtenerMisPostulaciones?._id 
+        skip: !obtenerMisPostulaciones?._id
     });
-    
+    console.log(data)
+
 
 
     const toggle = (id) => {
@@ -134,14 +135,23 @@ function MisInscripciones() {
                     </tbody>
 
 
+
                 </table>
             </div>
-            <form>
-                <h3>Seleccione un proyecto mediante el raddiobutton para registrar avances</h3>
-                <input type="text" placeholder="ingrese fecha"></input>
-                <input type="text" placeholder="ingrese descripcion"></input>
-                <button type="submit">Registrar Avances</button>
-            </form>
+            {data && data.obtenerMisPostulaciones.length === 0 ? (
+                <h3>no se ha postulado</h3>
+            ) : (
+                <form>
+                    <h3>Seleccione un proyecto mediante el raddiobutton para registrar avances</h3>
+                    <input type="text" placeholder="ingrese fecha"></input>
+                    <input type="text" placeholder="ingrese descripcion"></input>
+                    <button type="submit">Registrar Avances</button>
+                </form>
+
+            )
+
+            }
+
         </div>);
 
 }

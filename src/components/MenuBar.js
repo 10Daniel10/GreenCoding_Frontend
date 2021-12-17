@@ -5,16 +5,22 @@ import { Link } from 'react-router-dom';
 //import { ObtenerUsuarioQuery } from '../util/graphql';
 //import { useQuery } from '@apollo/react-hooks';
 import { AuthContext } from '../context/auth';
+import { useHistory } from "react-router-dom";
 
 function MenuBar() {
+  const history = useHistory();
   const { user, logout } = useContext(AuthContext);
+  if (user === null) {
+    history.push("/login")
+
+}
   const [value, setValue] = useState("");
 
   let val = ""
 
 
   useEffect(() => {
-
+    
     setValue(val);
 
   }, [val]);
@@ -39,23 +45,19 @@ function MenuBar() {
 
 
       <Menu pointing secondary size="massive" color="teal">
-        <Menu.Item name={value} active as={Link} to="/" />
+        <Menu.Item name={value}  />
 
         <Menu.Item name="Mi perfil" active as={Link} to="/miperfil" />
+        <Menu.Item name="proyetos" active as={Link} to="/home" />
 
-        <Menu.Item
-          name="proyectos"
-          active as={Link}
-          onClick={handleItemClick}
-          to="/"
-        />
+  
 
-        <Menu.Item name="Usuarios" active as={Link} to="/" />
+        <Menu.Item name="Usuarios" active as={Link} to="/usuarios" />
         <Menu.Item name="Proyectos Liderados" active as={Link} to="/misproyectos" />
 
 
         <Menu.Item name="Mis inscripciones" active as={Link} to="/misisncripciones" />
-        <Menu.Item name="Avances" active as={Link} to="/" />
+        <Menu.Item name="Avances" active as={Link} to="/avances" />
 
 
 
@@ -68,7 +70,7 @@ function MenuBar() {
 
     ) : user && user.perfil === "Administrador" ? (
       <Menu pointing secondary size="massive" color="teal">
-        <Menu.Item name={value} active as={Link} to="/" />
+        <Menu.Item name={value} />
 
         <Menu.Item name="Mi perfil" active as={Link} to="/miperfil" />
 
@@ -86,22 +88,24 @@ function MenuBar() {
    
       </Menu>
     ) : user && user.perfil === "Estudiante" ? (
-      <Menu>
-        <Menu.Item name={value} active as={Link} to="/" />
+      <Menu pointing secondary size="massive" color="teal">
+        <Menu.Item name={value} />
 
         <Menu.Item name="Mi perfil" active as={Link} to="/miperfil" />
 
 
-        <Menu.Item name="proyetos" active as={Link} to="/" />
+        <Menu.Item name="proyectos" active as={Link} to="/home" />
+        <Menu.Item name="Mis inscripciones" active as={Link} to="/misisncripciones" />
 
 
-        <Menu.Item name="avances" active as={Link} to="/p" />
+        <Menu.Item name="avances" active as={Link} to="/avances" />
         <Menu.Menu position="right">
           <Menu.Item name="logout" onClick={logout} />
         </Menu.Menu>
 
       </Menu>
-    ) :user===null &&(
+    ) :user===null &&  (
+      
       <Menu pointing secondary size="massive" color="teal">
         <Menu.Menu position="right">
           <Menu.Item

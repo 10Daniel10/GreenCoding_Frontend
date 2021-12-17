@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext} from 'react';
 import { useQuery } from '@apollo/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ObtenerUsuarioQuery } from '../util/graphql';
@@ -20,16 +20,12 @@ function MiPerfil() {
         estado: "",
         tipo: ""
     }
-    const [datos, setDatos] = useState(val);
+ 
 
 
 
     const obtenerUsuario = {}
-    useEffect(() => {
 
-        setDatos(val);
-
-    },[obtenerUsuario]);
 
 
 
@@ -67,11 +63,11 @@ function MiPerfil() {
             <div>
                 
                     <div>
-                        <h1>{datos.nombre}</h1>
-                        <h1>{datos.correo}</h1>
-                        <h1>{datos.clave}</h1>
-                        <h1>{datos.estado}</h1>
-                        <h1>{datos.tipo}</h1>
+                        <h1>{val.nombre}</h1>
+                        <h1>{val.correo}</h1>
+                        <h1>{val.clave}</h1>
+                        <h1>{val.estado}</h1>
+                        <h1>{val.tipo}</h1>
                     </div>
                 
             </div>
