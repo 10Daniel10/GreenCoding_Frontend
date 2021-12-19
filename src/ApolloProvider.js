@@ -6,9 +6,10 @@ import { ApolloProvider } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context";
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3020/graphql'
+  uri: 'http://proyectogreencoding.herokuapp.com/graphql'
 });
-
+//http://localhost:3020/graphql
+//http://proyectogreencoding.herokuapp.com/graphql
 
 const authLink = setContext(() => {
   const token = localStorage.getItem('jwtToken');

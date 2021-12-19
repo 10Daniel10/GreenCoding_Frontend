@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { useMutation } from '@apollo/client';
+import jwtDecode from 'jwt-decode';
 //import gql from 'graphql-tag';
 
 import { AuthContext } from '../context/auth';
@@ -27,12 +28,20 @@ function Login(props) {
     }
   }, [result])
   if (token && token.value === "Token válido") {
-    console.log(token)
- 
+    const decodedToken = jwtDecode(token.token);
+    if (decodedToken.estado === "Autorizado") {
+
+      //console.log(token)
+
       context.login(token.token);
       props.history.push('/');
       window.location.reload();
-    
+    }
+    if (decodedToken.estado !== "Autorizado") {
+      alert("no esta autorizado")
+
+    }
+
   }
   const { onChange, onSubmit, values } = useForm(loginUserCallback, {
     correo: '',

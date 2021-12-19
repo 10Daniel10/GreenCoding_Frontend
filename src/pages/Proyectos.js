@@ -20,7 +20,7 @@ import Row from "../components/proyectos/Row";
 
 const Proyectos = () => {
     const { user } = useContext(AuthContext);
-    const obj = JSON.parse(JSON.stringify(user))
+    //const obj = JSON.parse(JSON.stringify(user))
     const history = useHistory();
     if (user === null) {
         history.push("/login")
