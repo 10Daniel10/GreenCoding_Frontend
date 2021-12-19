@@ -38,7 +38,7 @@ function Login(props) {
       window.location.reload();
     }
     if (decodedToken.estado !== "Autorizado") {
-      alert("no esta autorizado")
+      
 
     }
 
